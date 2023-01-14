@@ -52,7 +52,7 @@ const ExploreItems = () => {
                 <i className="fa fa-check"></i>
               </Link>
             </div>
-            {item.expiryDate !== null && <Counter item={item}/>}
+            {item.expiryDate !== null && <Counter item={item} />}
 
             <div className="nft__item_wrap">
               <div className="nft__item_extra">
@@ -73,7 +73,11 @@ const ExploreItems = () => {
                 </div>
               </div>
               <Link to={`/item-details/${item.nftId}`}>
-                <img src={item.nftImage} className="lazy nft__item_preview" alt="" />
+                <img
+                  src={item.nftImage}
+                  className="lazy nft__item_preview"
+                  alt=""
+                />
               </Link>
             </div>
             <div className="nft__item_info">
@@ -89,11 +93,18 @@ const ExploreItems = () => {
           </div>
         </div>
       ))}
-      <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead" onClick={() => loadMore()}>
-          Load more
-        </Link>
-      </div>
+      {numOfResults < items.length && (
+        <div className="col-md-12 text-center">
+          <Link
+            to=""
+            id="loadmore"
+            className="btn-main lead"
+            onClick={() => loadMore()}
+          >
+            Load more
+          </Link>
+        </div>
+      )}
     </>
   );
 };
