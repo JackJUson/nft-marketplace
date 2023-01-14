@@ -17,6 +17,10 @@ const ExploreItems = () => {
     setItems(data);
   }
 
+  function loadMore() {
+    setNumOfResults(numOfResults + 4);
+  }
+
   useEffect(() => {
     fetchItems();
   }, []);
@@ -86,7 +90,7 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
+        <Link to="" id="loadmore" className="btn-main lead" onClick={() => loadMore()}>
           Load more
         </Link>
       </div>
