@@ -10,6 +10,12 @@ export default function Counter({ item }) {
 
   function displayCounter() {
     const timeLeftinMs = item.expiryDate - time;
+    if (timeLeftinMs < 0) {
+      setSecond(0);
+      setMinute(0);
+      setHour(0);
+      return;
+    }
     setSecond(Math.floor(timeLeftinMs / 1000) % 60);
     setMinute(Math.floor(timeLeftinMs / (1000 * 60)) % 60);
     setHour(Math.floor(timeLeftinMs / (1000 * 60 * 60)));
