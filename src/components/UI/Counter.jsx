@@ -5,10 +5,14 @@ export default function Counter({ item }) {
   const [time, setTime] = useState(Date.now());
 
   const [second, setSecond] = useState();
+  const [minute, setMinute] = useState();
+  const [hour, setHour] = useState();
 
   function displayCounter() {
     const timeLeftinMs = item.expiryDate - time;
     setSecond(Math.floor(timeLeftinMs / 1000) % 60);
+    setMinute(Math.floor(timeLeftinMs / (1000 * 60)) % 60);
+    setHour(Math.floor(timeLeftinMs / (1000 * 60 * 60)));
   }
 
   useEffect(() => {
@@ -18,5 +22,5 @@ export default function Counter({ item }) {
     }, 1000);
   }, [time]);
 
-  return <div className="de_countdown">{`${second}`}</div>;
+  return <div className="de_countdown">{`${hour}h ${minute}m ${second}s`}</div>;
 }
