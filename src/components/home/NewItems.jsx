@@ -3,8 +3,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const NewItems = () => {
   const [items, setItems] = useState([]);
@@ -30,8 +31,8 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {items.map((item, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
+          <OwlCarousel className="owl-theme owl-custom" loop margin={10} nav>
+            {items.map((item, index) => (
               <div className="nft__item" key={index}>
                 <div className="author_list_pp">
                   <Link
@@ -84,8 +85,8 @@ const NewItems = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </OwlCarousel>
         </div>
       </div>
     </section>
