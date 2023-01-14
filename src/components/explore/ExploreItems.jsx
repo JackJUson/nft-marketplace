@@ -23,6 +23,7 @@ const ExploreItems = () => {
   }
 
   async function sortItems(value) {
+    setItems([]);
     const { data } = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${value}`
     );
