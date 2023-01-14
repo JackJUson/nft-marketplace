@@ -47,7 +47,7 @@ const NewItems = () => {
             </div>
           </div>
           <OwlCarousel
-            className="owl-theme owl-custom"
+            className="owl-theme"
             loop
             margin={10}
             nav
@@ -57,7 +57,7 @@ const NewItems = () => {
               <div className="nft__item" key={index}>
                 <div className="author_list_pp">
                   <Link
-                    to="/author"
+                    to={`/author/${item.authorId}`}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title={item.title}
@@ -87,7 +87,7 @@ const NewItems = () => {
                     </div>
                   </div>
 
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${item.nftId}`}>
                     <img
                       src={item.nftImage}
                       className="lazy nft__item_preview"
@@ -96,7 +96,7 @@ const NewItems = () => {
                   </Link>
                 </div>
                 <div className="nft__item_info">
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${item.nftId}`}>
                     <h4>{item.title}</h4>
                   </Link>
                   <div className="nft__item_price">{item.price} ETH</div>
