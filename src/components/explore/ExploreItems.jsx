@@ -3,12 +3,12 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import Counter from "../UI/Counter";
 
 const ExploreItems = () => {
   const [items, setItems] = useState([]);
+  const initialNumberOfItems = 8;
+  const [numOfResults, setNumOfResults] = useState(initialNumberOfItems);
 
   async function fetchItems() {
     const { data } = await axios.get(
@@ -31,7 +31,7 @@ const ExploreItems = () => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {items.map((item, index) => (
+      {items.slice(0, numOfResults).map((item, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -74,7 +74,7 @@ const ExploreItems = () => {
             </div>
             <div className="nft__item_info">
               <Link to={`/item-details/${item.nftId}`}>
-                <h4>Pinky Ocean</h4>
+                <h4>{item.title}</h4>
               </Link>
               <div className="nft__item_price">{item.price} ETH</div>
               <div className="nft__item_like">
