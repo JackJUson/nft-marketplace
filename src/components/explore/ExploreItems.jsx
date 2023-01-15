@@ -36,7 +36,7 @@ const ExploreItems = () => {
 
   return (
     <>
-      <div>
+      <div data-aos="fade-in" data-aos-once="true">
         <select
           id="filter-items"
           defaultValue=""
