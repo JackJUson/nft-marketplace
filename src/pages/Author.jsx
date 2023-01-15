@@ -7,8 +7,19 @@ import { useEffect } from "react";
 
 const Author = () => {
   const { id } = useParams();
-  
+
   const [author, setAuthor] = useState({});
+  const [following, setFollowing] = useState(false);
+
+  function follow() {
+    setFollowing(true);
+    setAuthor({ ...author, followers: author.followers + 1 });
+  }
+
+  function unfollow() {
+    setFollowing(false);
+    setAuthor({ ...author, followers: author.followers - 1 });
+  }
 
   async function fetchAuthor() {
     const { data } = await axios.get(
@@ -47,7 +58,9 @@ const Author = () => {
                       <div className="profile_name">
                         <h4>
                           {author.authorName}
-                          <span className="profile_username">@{author.tag}</span>
+                          <span className="profile_username">
+                            @{author.tag}
+                          </span>
                           <span id="wallet" className="profile_wallet">
                             {author.address}
                           </span>
@@ -60,10 +73,18 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{author.followers} followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      <div className="profile_follower">
+                        {author.followers} followers
+                      </div>
+                      {following ? (
+                        <Link to="#" className="btn-main" onClick={() => unfollow()}>
+                          Unfollow
+                        </Link>
+                      ) : (
+                        <Link to="#" className="btn-main" onClick={() => follow()}>
+                          Follow
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -71,7 +92,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems collections={author.nftCollection}/>
+                  <AuthorItems author={author}/>
                 </div>
               </div>
             </div>
