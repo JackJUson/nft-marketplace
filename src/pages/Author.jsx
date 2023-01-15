@@ -4,6 +4,7 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
   const { id } = useParams();
@@ -45,59 +46,135 @@ const Author = () => {
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
 
-        <section aria-label="section">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="d_profile de-flex">
-                  <div className="de-flex-col">
-                    <div className="profile_avatar">
-                      <img src={author.authorImage} alt="" />
+        {author ? (
+          <section aria-label="section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <img src={author.authorImage} alt="" />
 
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4>
-                          {author.authorName}
-                          <span className="profile_username">
-                            @{author.tag}
-                          </span>
-                          <span id="wallet" className="profile_wallet">
-                            {author.address}
-                          </span>
-                          <button id="btn_copy" title="Copy Text">
-                            Copy
-                          </button>
-                        </h4>
+                        <i className="fa fa-check"></i>
+                        <div className="profile_name">
+                          <h4>
+                            {author.authorName}
+                            <span className="profile_username">
+                              @{author.tag}
+                            </span>
+                            <span id="wallet" className="profile_wallet">
+                              {author.address}
+                            </span>
+                            <button id="btn_copy" title="Copy Text">
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="profile_follow de-flex">
-                    <div className="de-flex-col">
-                      <div className="profile_follower">
-                        {author.followers} followers
+                    <div className="profile_follow de-flex">
+                      <div className="de-flex-col">
+                        <div className="profile_follower">
+                          {author.followers} followers
+                        </div>
+                        {following ? (
+                          <Link
+                            to="#"
+                            className="btn-main"
+                            onClick={() => unfollow()}
+                          >
+                            Unfollow
+                          </Link>
+                        ) : (
+                          <Link
+                            to="#"
+                            className="btn-main"
+                            onClick={() => follow()}
+                          >
+                            Follow
+                          </Link>
+                        )}
                       </div>
-                      {following ? (
-                        <Link to="#" className="btn-main" onClick={() => unfollow()}>
-                          Unfollow
-                        </Link>
-                      ) : (
-                        <Link to="#" className="btn-main" onClick={() => follow()}>
-                          Follow
-                        </Link>
-                      )}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-md-12">
-                <div className="de_tab tab_simple">
-                  <AuthorItems author={author}/>
+                <div className="col-md-12">
+                  <div className="de_tab tab_simple">
+                    <AuthorItems author={author} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : (
+          <section aria-label="section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <Skeleton
+                          width={"150px"}
+                          height={"150px"}
+                          borderRadius={"50%"}
+                        />
+                        <i className="fa fa-check"></i>
+                        <div className="profile_name">
+                          <h4>
+                            <Skeleton
+                              width={"200px"}
+                              height={"30px"}
+                              borderRadius={"16px"}
+                            />
+                            <span className="profile_username">
+                              <Skeleton
+                                width={"100px"}
+                                height={"20px"}
+                                borderRadius={"8px"}
+                              />
+                            </span>
+                            <span id="wallet" className="profile_wallet">
+                              <Skeleton
+                                width={"200px"}
+                                height={"15px"}
+                                borderRadius={"6px"}
+                              />
+                            </span>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="profile_follow de-flex">
+                      <div className="de-flex-col">
+                        <div className="profile_follower">
+                          <Skeleton
+                            width={"150px"}
+                            height={"20px"}
+                            borderRadius={"8px"}
+                          />
+                        </div>
+                        <Skeleton
+                          width={"122px"}
+                          height={"42px"}
+                          borderRadius={"8px"}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="de_tab tab_simple">
+                    <AuthorItems data={{}} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
