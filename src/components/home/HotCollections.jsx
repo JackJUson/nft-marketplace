@@ -30,11 +30,11 @@ const HotCollections = () => {
     dots: false,
     responsiveRefreshRate: 50,
     responsive: {
-      1200: {items: 4},
-      768: {items: 3},
-      470: {items: 2},
-      0: {items: 1}
-    }
+      1200: { items: 4 },
+      768: { items: 3 },
+      470: { items: 2 },
+      0: { items: 1 },
+    },
   };
 
   return (
@@ -43,7 +43,9 @@ const HotCollections = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Hot Collections</h2>
+              <h2 data-aos="fade-in" data-aos-offset="50" data-aos-once="true">
+                Hot Collections
+              </h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
